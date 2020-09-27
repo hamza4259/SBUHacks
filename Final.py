@@ -1,0 +1,105 @@
+import tkinter as tk
+from tkinter import *
+from tkinter import scrolledtext
+from tkinter import messagebox
+from tkinter.ttk import Progressbar
+from tkinter import filedialog
+from tkinter import Menu
+from tkinter import Tk, Canvas, Frame, BOTH
+from main import mainStructure
+import webbrowser
+from time import sleep
+
+
+#LOADING SCREEN START
+
+def task():
+    # The window will stay open until this function call ends.
+    sleep(1)
+    loading.destroy()
+
+loading = tk.Tk()
+loading.title("Welcome to Hospital Locator")
+
+C = Canvas(loading, bg="blue", height=250, width=300)
+filename = PhotoImage(file = "images/Frame-2.png")
+background_label = Label(loading, image=filename)
+loading.geometry('1280x820')
+background_label.place(x=0, y=0, relwidth=1, relheight=1)
+C.pack()
+loading.after(100, task)
+loading.mainloop()
+
+#LOADING SCREEN END
+#print("Loading loop is now over and we can do other stuff.")
+
+
+#MAIN WINDOW START
+
+# create window
+window = Tk()
+window.title("SquishySquids App")
+# setting window size
+window.geometry('1280x820')
+w = Canvas(window, width = 1280, height = 820)
+w.pack()
+
+#MAIN WINDOW END
+
+
+
+# COMPONENTS START
+
+# create a label widget with font size
+#lbl = Label(window, text = "Hospitals Near You", font = ("Arial Bold",20))
+#lbl.grid(column = 0, row = 5)
+
+#LEFT SIDE BANNER
+def drawLeft():
+    y = int(820 / 2)
+    w.create_line(0, y, 1280, y, fill="#303941")
+
+    #Blue Background
+    w.create_rectangle(0, 0, 450, 820, outline="#BADEFF", fill="#BADEFF", width=2)
+    #The line
+    w.create_line(50, 150, 400, 150, fill="#476042")
+    #Hospitals Near You
+    mylabel = w.create_text((220, 100), text="Hospitals Near You", font = ("Montserrat 25 bold"))
+    #Address 1
+    shortAddressIWillUseInThisUI = mainStructure()
+    mylabel = w.create_text((220, 185), text=shortAddressIWillUseInThisUI[0][0], font = ("Montserrat 16 bold"))
+    mylabel2 = w.create_text((220, 225), text="Closest To You!!!", font = ("Montserrat 16 bold"))
+    #Address 2
+    print(shortAddressIWillUseInThisUI[0])
+    shortAddressIWillUseInThisUI = mainStructure()
+    mylabel = w.create_text((220, 285), text=shortAddressIWillUseInThisUI[1][0], font = ("Montserrat 16 bold"))
+    w.create_line(50, 250, 400, 250, fill="#476042")
+    #Address 3
+    shortAddressIWillUseInThisUI = mainStructure()
+    mylabel = w.create_text((220, 385), text=shortAddressIWillUseInThisUI[2][0], font = ("Montserrat 16 bold"))
+    w.create_line(50, 350, 400, 350, fill="#476042")
+    #Address 4
+    shortAddressIWillUseInThisUI = mainStructure()
+    mylabel = w.create_text((220, 485), text=shortAddressIWillUseInThisUI[3][0], font = ("Montserrat 16 bold"))
+    w.create_line(50, 450, 400, 450, fill="#476042")
+    #Address 5
+    shortAddressIWillUseInThisUI = mainStructure()
+    mylabel = w.create_text((220, 585), text=shortAddressIWillUseInThisUI[4][0], font = ("Montserrat 16 bold"))
+    w.create_line(50, 550, 400, 550, fill="#476042")
+    w.create_line(50, 620, 400, 620, fill="#476042")
+    #bottom stuff
+    mylabel = w.create_text((220, 700), text="In Case of An Emergency, Call 911", font = ("Montserrat 18 bold"))
+
+    print('Left DONE')
+
+
+drawLeft()
+
+
+#index = open("search.html").read().format(address = shortAddressIWillUseInThisUI[0][0], time =shortAddressIWillUseInThisUI[0][2], distance = shortAddressIWillUseInThisUI[0][1] )
+#webbrowser.open("Search.html")
+
+
+# PROBABLY THE MOST IMPORTANT PART!!!!!!!!!!
+# if you forget to call the mainloop function, nothing will appear to the user
+window.mainloop()
